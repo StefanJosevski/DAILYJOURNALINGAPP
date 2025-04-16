@@ -1,0 +1,150 @@
+User Manual: 
+# 🧭 Daily Journal App – User Manual
+
+## 📋 Overview
+The **Daily Journal App** is a desktop application for writing and managing personal journal entries with reminder and export features.
+
+---
+
+## 🚀 Getting Started
+
+### System Requirements:
+- Java 11+
+- JavaFX SDK
+- IDE (e.g., IntelliJ IDEA) or terminal with JavaFX configured
+
+### Launching:
+1. Compile and run `DailyJournalAppFX.java`.
+2. The app will open the login screen.
+
+---
+
+## 🔐 Login
+
+- **Username**: `stefan`
+- **Password**: `pass123`
+- Click `Login` to continue.
+
+---
+
+## 🧭 Main Menu Options
+
+| Button              | Description                                |
+|---------------------|--------------------------------------------|
+| 📝 Create Entry     | Add a new journal entry                    |
+| 📖 View Entries     | View all your saved entries                |
+| ⏰ Set Reminder     | Schedule a reminder with a message         |
+| 📤 Export Entries   | Export entries to PDF or Word (simulated)  |
+| ❌ Exit             | Close the application                      |
+
+---
+
+## 📝 Creating a Journal Entry
+
+- You'll be asked for a **Title** and **Content**.
+- Click `OK` to save your entry.
+
+---
+
+## 📖 Viewing Entries
+
+- All your entries will appear in a popup.
+
+---
+
+## ⏰ Setting a Reminder
+
+- Enter a **message** and a number of **days from today**.
+- Reminders are saved and printed to the console.
+
+---
+
+## 📤 Exporting Entries
+
+- Choose between **PDF** and **Word**.
+- The export is simulated and printed in the console.
+
+---
+
+## 🧯 Troubleshooting
+
+- If login fails, double-check your username and password.
+- For invalid input (like days), an error dialog will appear.
+
+Implementation Manual:
+## 📚 Class Descriptions
+
+### `User`
+Handles login and storage of entries/reminders.
+- **Fields**: `userID`, `username`, `password`, `email`, `journalEntries`, `reminders`
+- **Key Methods**:
+  - `login(username, password)`
+  - `addEntry(entry)`
+  - `getEntries()`
+  - `addReminder(reminder)`
+  - `getReminders()`
+
+---
+
+### `JournalEntry`
+Represents a journal post.
+- **Fields**: `entryID`, `title`, `content`, `dateCreated`, `tags`
+- **Key Methods**:
+  - `addTag(tag)`
+  - `containsKeyword(keyword)`
+  - `toString()`
+
+---
+
+### `Reminder`
+Stores a future reminder.
+- **Fields**: `reminderID`, `reminderDate`, `message`
+- **Key Method**:
+  - `toString()`
+
+---
+
+### `Tag`
+Label assigned to a journal entry.
+- **Fields**: `tagID`, `name`
+- **Key Method**:
+  - `getName()`
+
+---
+
+### `ExportManager`
+Simulates exporting journal entries.
+- **Key Methods**:
+  - `exportToPDF(List<JournalEntry>)`
+  - `exportToWord(List<JournalEntry>)`
+  - _(Console output only)_
+
+---
+
+## 🖥️ JavaFX UI Flow
+
+1. `start(Stage)` → `showLoginScreen()`
+2. On successful login → `showMainMenu()`
+3. Menu Options:
+   - `Create Entry` → `showCreateEntryDialog()`
+   - `View Entries` → `showEntriesDialog()`
+   - `Set Reminder` → `showReminderDialog()`
+   - `Export Entries` → `showExportDialog()`
+
+---
+
+## 🚀 Future Improvements
+
+- **File/database storage** for persistence (JSON, SQLite, etc.)
+- **Multi-user support** with account registration
+- **Tag filtering & searching**
+- **Actual exporting** using libraries like iText or Apache POI
+- **Reminder notifications** using system tray or JavaFX alerts
+
+---
+
+## 🧑‍🎓 Project Notes
+
+- Built as a solo student project.
+- Object-oriented design and UI separation respected.
+- Easy to scale into a full-featured journaling tool.
