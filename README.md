@@ -33,6 +33,8 @@ graphql
 Copy
 Edit
 org.example.demo1/
+
+
 ├── DailyJournalAppFX.java   # JavaFX GUI and main app
 ├── User.java                # User class and login logic
 ├── JournalEntry.java        # Entry creation and keyword search
@@ -40,7 +42,7 @@ org.example.demo1/
 ├── Reminder.java            # Reminder functionality
 └── ExportManager.java       # Simulated export to PDF/Word
 📸 Screenshots
-Add screenshots here if you'd like.
+
 
 📚 Course
 CSI 2300 - Object-Oriented Programming
