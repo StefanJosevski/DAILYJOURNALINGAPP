@@ -21,13 +21,6 @@ First-generation college student at Oakland University, studying Information Tec
 - Exception Handling
 - Data Structures (Lists)
 
-## 🚀 Getting Started
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/your-username/daily-journal-app.git
-   cd daily-journal-app
-Run the project in IntelliJ IDEA (recommended) or any Java IDE.
-
 Login using:
 
 makefile
