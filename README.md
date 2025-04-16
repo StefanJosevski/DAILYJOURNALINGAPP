@@ -42,6 +42,12 @@ org.example.demo1/
 ├── Reminder.java            # Reminder functionality
 └── ExportManager.java       # Simulated export to PDF/Word
 📸 Screenshots
+![Screenshot 2025-04-16 141836](https://github.com/user-attachments/assets/dd3862e7-3784-415a-ada1-000bfb1c60dc) 
+![Screenshot 2025-04-16 141905](https://github.com/user-attachments/assets/6837ddf7-ce68-4e11-8e1a-85c7a086eb79)
+![Journal UML](https://github.com/user-attachments/assets/d85da56f-18ce-4deb-b352-e15a2a0580a5)
+
+
+
 
 
 📚 Course
