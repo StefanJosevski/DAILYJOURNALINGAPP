@@ -1,0 +1,291 @@
+package org.example.demo2;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
+import javafx.geometry.*;
+import java.util.*;
+
+// USER CLASS
+class User {
+    private int userID;
+    private String username;
+    private String password;
+    private String email;
+    private List<JournalEntry> journalEntries = new ArrayList<>();
+    private List<Reminder> reminders = new ArrayList<>();
+
+    public User(int userID, String username, String password, String email) {
+        this.userID = userID;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
+
+    public boolean login(String username, String password) {
+        return this.username.equals(username) && this.password.equals(password);
+    }
+
+    public void addEntry(JournalEntry entry) {
+        journalEntries.add(entry);
+    }
+
+    public List<JournalEntry> getEntries() {
+        return journalEntries;
+    }
+
+    public void addReminder(Reminder reminder) {
+        reminders.add(reminder);
+    }
+
+    public List<Reminder> getReminders() {
+        return reminders;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+}
+
+// TAG CLASS
+class Tag {
+    private static int nextId = 1;
+    private int tagID;
+    private String name;
+
+    public Tag(String name) {
+        this.tagID = nextId++;
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+
+// JOURNAL ENTRY CLASS
+class JournalEntry {
+    private static int nextId = 1;
+    private int entryID;
+    private String title;
+    private String content;
+    private Date dateCreated;
+    private List<Tag> tags = new ArrayList<>();
+
+    public JournalEntry(String title, String content) {
+        this.entryID = nextId++;
+        this.title = title;
+        this.content = content;
+        this.dateCreated = new Date();
+    }
+
+    public void addTag(Tag tag) {
+        tags.add(tag);
+    }
+
+    public boolean containsKeyword(String keyword) {
+        return title.toLowerCase().contains(keyword.toLowerCase()) ||
+                content.toLowerCase().contains(keyword.toLowerCase());
+    }
+
+    public String toString() {
+        return "[" + dateCreated + "] " + title + ": " + content;
+    }
+}
+
+// REMINDER CLASS
+class Reminder {
+    private static int nextId = 1;
+    private int reminderID;
+    private Date reminderDate;
+    private String message;
+
+    public Reminder(Date reminderDate, String message) {
+        this.reminderID = nextId++;
+        this.reminderDate = reminderDate;
+        this.message = message;
+    }
+
+    public String toString() {
+        return "Reminder on " + reminderDate + ": " + message;
+    }
+}
+
+// EXPORT MANAGER CLASS
+class ExportManager {
+    public static void exportToPDF(List<JournalEntry> entries) {
+        System.out.println("Exporting entries to PDF (simulated)...");
+        for (JournalEntry entry : entries) {
+            System.out.println("[PDF] " + entry);
+        }
+    }
+
+    public static void exportToWord(List<JournalEntry> entries) {
+        System.out.println("Exporting entries to Word (simulated)...");
+        for (JournalEntry entry : entries) {
+            System.out.println("[Word] " + entry);
+        }
+    }
+}
+
+// MAIN APP (JavaFX)
+public class DailyJournalAppFX extends Application {
+    private User currentUser = new User(1, "stefan", "pass123", "stefan@email.com");
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage stage) {
+        stage.setTitle("Daily Journal App");
+        showLoginScreen(stage);
+    }
+
+    private void showLoginScreen(Stage stage) {
+        VBox loginBox = new VBox(15);
+        loginBox.setPadding(new Insets(30));
+        loginBox.setStyle("-fx-background-color: #e3f2fd;");
+
+        Label titleLabel = new Label("Welcome to Daily Journal App");
+        titleLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #1565c0;");
+
+        TextField usernameField = new TextField();
+        usernameField.setPromptText("Username");
+        usernameField.setStyle("-fx-font-size: 14px;");
+
+        PasswordField passwordField = new PasswordField();
+        passwordField.setPromptText("Password");
+        passwordField.setStyle("-fx-font-size: 14px;");
+
+        Button loginBtn = new Button("Login");
+        loginBtn.setStyle(buttonStyle());
+
+        loginBtn.setOnAction(e -> {
+            if (currentUser.login(usernameField.getText(), passwordField.getText())) {
+                showMainMenu(stage);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Login failed.");
+                alert.showAndWait();
+            }
+        });
+
+        loginBox.getChildren().addAll(titleLabel, usernameField, passwordField, loginBtn);
+        loginBox.setAlignment(Pos.CENTER);
+
+        Scene scene = new Scene(loginBox, 400, 300);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private void showMainMenu(Stage stage) {
+        VBox menu = new VBox(15);
+        menu.setPadding(new Insets(30));
+        menu.setStyle("-fx-background-color: #e3f2fd;");
+        menu.setAlignment(Pos.CENTER);
+
+        Label header = new Label("Main Menu");
+        header.setStyle("-fx-font-size: 20px; -fx-text-fill: #0d47a1; -fx-font-weight: bold;");
+
+        Button createBtn = new Button("📝 Create Entry");
+        Button viewBtn = new Button("📖 View Entries");
+        Button reminderBtn = new Button("⏰ Set Reminder");
+        Button exportBtn = new Button("📤 Export Entries");
+        Button exitBtn = new Button("❌ Exit");
+
+        for (Button btn : new Button[]{createBtn, viewBtn, reminderBtn, exportBtn, exitBtn}) {
+            btn.setStyle(buttonStyle());
+            btn.setMaxWidth(200);
+        }
+
+        createBtn.setOnAction(e -> showCreateEntryDialog());
+        viewBtn.setOnAction(e -> showEntriesDialog());
+        reminderBtn.setOnAction(e -> showReminderDialog());
+        exportBtn.setOnAction(e -> showExportDialog());
+        exitBtn.setOnAction(e -> stage.close());
+
+        menu.getChildren().addAll(header, createBtn, viewBtn, reminderBtn, exportBtn, exitBtn);
+        stage.setScene(new Scene(menu, 400, 400));
+        stage.show();
+    }
+
+    private String buttonStyle() {
+        return "-fx-background-color: #64b5f6; " +
+                "-fx-text-fill: white; " +
+                "-fx-font-size: 14px; " +
+                "-fx-background-radius: 10; " +
+                "-fx-padding: 10 20 10 20;";
+    }
+
+    private void showCreateEntryDialog() {
+        TextInputDialog titleDialog = new TextInputDialog();
+        titleDialog.setHeaderText("Enter Entry Title:");
+        Optional<String> title = titleDialog.showAndWait();
+
+        TextInputDialog contentDialog = new TextInputDialog();
+        contentDialog.setHeaderText("Enter Entry Content:");
+        Optional<String> content = contentDialog.showAndWait();
+
+        if (title.isPresent() && content.isPresent()) {
+            JournalEntry entry = new JournalEntry(title.get(), content.get());
+            currentUser.addEntry(entry);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Entry saved.");
+            alert.showAndWait();
+        }
+    }
+
+    private void showEntriesDialog() {
+        StringBuilder sb = new StringBuilder();
+        for (JournalEntry entry : currentUser.getEntries()) {
+            sb.append(entry).append("\n\n");
+        }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, sb.toString());
+        alert.setTitle("All Journal Entries");
+        alert.setHeaderText(null);
+        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+        alert.showAndWait();
+    }
+
+    private void showReminderDialog() {
+        TextInputDialog msgDialog = new TextInputDialog();
+        msgDialog.setHeaderText("Enter Reminder Message:");
+        Optional<String> message = msgDialog.showAndWait();
+
+        TextInputDialog daysDialog = new TextInputDialog();
+        daysDialog.setHeaderText("In how many days?");
+        Optional<String> daysStr = daysDialog.showAndWait();
+
+        if (message.isPresent() && daysStr.isPresent()) {
+            try {
+                int days = Integer.parseInt(daysStr.get());
+                Calendar cal = Calendar.getInstance();
+                cal.add(Calendar.DAY_OF_MONTH, days);
+                Reminder reminder = new Reminder(cal.getTime(), message.get());
+                currentUser.addReminder(reminder);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Reminder set.");
+                alert.showAndWait();
+            } catch (NumberFormatException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid number of days.");
+                alert.showAndWait();
+            }
+        }
+    }
+
+    private void showExportDialog() {
+        ChoiceDialog<String> dialog = new ChoiceDialog<>("PDF", "PDF", "Word");
+        dialog.setHeaderText("Choose export format:");
+        Optional<String> choice = dialog.showAndWait();
+
+        if (choice.isPresent()) {
+            if (choice.get().equals("PDF")) {
+                ExportManager.exportToPDF(currentUser.getEntries());
+            } else {
+                ExportManager.exportToWord(currentUser.getEntries());
+            }
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Export simulated in console.");
+            alert.showAndWait();
+        }
+    }
+}
