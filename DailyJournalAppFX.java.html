@@ -1,0 +1,313 @@
+<html>
+<head>
+<title>DailyJournalAppFX.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #2aacb8;}
+.s5 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+DailyJournalAppFX.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">org</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">demo2</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">application</span><span class="s2">.</span><span class="s1">Application</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">Scene</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">control</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">stage</span><span class="s2">.</span><span class="s1">Stage</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">geometry</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.*;</span>
+
+<span class="s3">// USER CLASS</span>
+<span class="s0">class </span><span class="s1">User </span><span class="s2">{</span>
+    <span class="s0">private int </span><span class="s1">userID</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">String username</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">String password</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">String email</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">JournalEntry</span><span class="s2">&gt; </span><span class="s1">journalEntries </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+    <span class="s0">private </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Reminder</span><span class="s2">&gt; </span><span class="s1">reminders </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+
+    <span class="s0">public </span><span class="s1">User</span><span class="s2">(</span><span class="s0">int </span><span class="s1">userID</span><span class="s2">, </span><span class="s1">String username</span><span class="s2">, </span><span class="s1">String password</span><span class="s2">, </span><span class="s1">String email</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">userID </span><span class="s2">= </span><span class="s1">userID</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">username </span><span class="s2">= </span><span class="s1">username</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">password </span><span class="s2">= </span><span class="s1">password</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">email </span><span class="s2">= </span><span class="s1">email</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">login</span><span class="s2">(</span><span class="s1">String username</span><span class="s2">, </span><span class="s1">String password</span><span class="s2">) {</span>
+        <span class="s0">return this</span><span class="s2">.</span><span class="s1">username</span><span class="s2">.</span><span class="s1">equals</span><span class="s2">(</span><span class="s1">username</span><span class="s2">) &amp;&amp; </span><span class="s0">this</span><span class="s2">.</span><span class="s1">password</span><span class="s2">.</span><span class="s1">equals</span><span class="s2">(</span><span class="s1">password</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">addEntry</span><span class="s2">(</span><span class="s1">JournalEntry entry</span><span class="s2">) {</span>
+        <span class="s1">journalEntries</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">entry</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">JournalEntry</span><span class="s2">&gt; </span><span class="s1">getEntries</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">journalEntries</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">addReminder</span><span class="s2">(</span><span class="s1">Reminder reminder</span><span class="s2">) {</span>
+        <span class="s1">reminders</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">reminder</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Reminder</span><span class="s2">&gt; </span><span class="s1">getReminders</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">reminders</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">String getUsername</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">username</span><span class="s2">;</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s3">// TAG CLASS</span>
+<span class="s0">class </span><span class="s1">Tag </span><span class="s2">{</span>
+    <span class="s0">private static int </span><span class="s1">nextId </span><span class="s2">= </span><span class="s4">1</span><span class="s2">;</span>
+    <span class="s0">private int </span><span class="s1">tagID</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">String name</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">Tag</span><span class="s2">(</span><span class="s1">String name</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">tagID </span><span class="s2">= </span><span class="s1">nextId</span><span class="s2">++;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">name </span><span class="s2">= </span><span class="s1">name</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">String getName</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">name</span><span class="s2">;</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s3">// JOURNAL ENTRY CLASS</span>
+<span class="s0">class </span><span class="s1">JournalEntry </span><span class="s2">{</span>
+    <span class="s0">private static int </span><span class="s1">nextId </span><span class="s2">= </span><span class="s4">1</span><span class="s2">;</span>
+    <span class="s0">private int </span><span class="s1">entryID</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">String title</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">String content</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">Date dateCreated</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Tag</span><span class="s2">&gt; </span><span class="s1">tags </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+
+    <span class="s0">public </span><span class="s1">JournalEntry</span><span class="s2">(</span><span class="s1">String title</span><span class="s2">, </span><span class="s1">String content</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">entryID </span><span class="s2">= </span><span class="s1">nextId</span><span class="s2">++;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">title </span><span class="s2">= </span><span class="s1">title</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">content </span><span class="s2">= </span><span class="s1">content</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">dateCreated </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Date</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">addTag</span><span class="s2">(</span><span class="s1">Tag tag</span><span class="s2">) {</span>
+        <span class="s1">tags</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">tag</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">containsKeyword</span><span class="s2">(</span><span class="s1">String keyword</span><span class="s2">) {</span>
+        <span class="s0">return </span><span class="s1">title</span><span class="s2">.</span><span class="s1">toLowerCase</span><span class="s2">().</span><span class="s1">contains</span><span class="s2">(</span><span class="s1">keyword</span><span class="s2">.</span><span class="s1">toLowerCase</span><span class="s2">()) ||</span>
+                <span class="s1">content</span><span class="s2">.</span><span class="s1">toLowerCase</span><span class="s2">().</span><span class="s1">contains</span><span class="s2">(</span><span class="s1">keyword</span><span class="s2">.</span><span class="s1">toLowerCase</span><span class="s2">());</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">String toString</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s5">&quot;[&quot; </span><span class="s2">+ </span><span class="s1">dateCreated </span><span class="s2">+ </span><span class="s5">&quot;] &quot; </span><span class="s2">+ </span><span class="s1">title </span><span class="s2">+ </span><span class="s5">&quot;: &quot; </span><span class="s2">+ </span><span class="s1">content</span><span class="s2">;</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s3">// REMINDER CLASS</span>
+<span class="s0">class </span><span class="s1">Reminder </span><span class="s2">{</span>
+    <span class="s0">private static int </span><span class="s1">nextId </span><span class="s2">= </span><span class="s4">1</span><span class="s2">;</span>
+    <span class="s0">private int </span><span class="s1">reminderID</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">Date reminderDate</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">String message</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">Reminder</span><span class="s2">(</span><span class="s1">Date reminderDate</span><span class="s2">, </span><span class="s1">String message</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">reminderID </span><span class="s2">= </span><span class="s1">nextId</span><span class="s2">++;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">reminderDate </span><span class="s2">= </span><span class="s1">reminderDate</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">message </span><span class="s2">= </span><span class="s1">message</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">String toString</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s5">&quot;Reminder on &quot; </span><span class="s2">+ </span><span class="s1">reminderDate </span><span class="s2">+ </span><span class="s5">&quot;: &quot; </span><span class="s2">+ </span><span class="s1">message</span><span class="s2">;</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s3">// EXPORT MANAGER CLASS</span>
+<span class="s0">class </span><span class="s1">ExportManager </span><span class="s2">{</span>
+    <span class="s0">public static void </span><span class="s1">exportToPDF</span><span class="s2">(</span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">JournalEntry</span><span class="s2">&gt; </span><span class="s1">entries</span><span class="s2">) {</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s5">&quot;Exporting entries to PDF (simulated)...&quot;</span><span class="s2">);</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">JournalEntry entry </span><span class="s2">: </span><span class="s1">entries</span><span class="s2">) {</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s5">&quot;[PDF] &quot; </span><span class="s2">+ </span><span class="s1">entry</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static void </span><span class="s1">exportToWord</span><span class="s2">(</span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">JournalEntry</span><span class="s2">&gt; </span><span class="s1">entries</span><span class="s2">) {</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s5">&quot;Exporting entries to Word (simulated)...&quot;</span><span class="s2">);</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">JournalEntry entry </span><span class="s2">: </span><span class="s1">entries</span><span class="s2">) {</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s5">&quot;[Word] &quot; </span><span class="s2">+ </span><span class="s1">entry</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s3">// MAIN APP (JavaFX)</span>
+<span class="s0">public class </span><span class="s1">DailyJournalAppFX </span><span class="s0">extends </span><span class="s1">Application </span><span class="s2">{</span>
+    <span class="s0">private </span><span class="s1">User currentUser </span><span class="s2">= </span><span class="s0">new </span><span class="s1">User</span><span class="s2">(</span><span class="s4">1</span><span class="s2">, </span><span class="s5">&quot;stefan&quot;</span><span class="s2">, </span><span class="s5">&quot;pass123&quot;</span><span class="s2">, </span><span class="s5">&quot;stefan@email.com&quot;</span><span class="s2">);</span>
+
+    <span class="s0">public static void </span><span class="s1">main</span><span class="s2">(</span><span class="s1">String</span><span class="s2">[] </span><span class="s1">args</span><span class="s2">) {</span>
+        <span class="s1">launch</span><span class="s2">(</span><span class="s1">args</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">start</span><span class="s2">(</span><span class="s1">Stage stage</span><span class="s2">) {</span>
+        <span class="s1">stage</span><span class="s2">.</span><span class="s1">setTitle</span><span class="s2">(</span><span class="s5">&quot;Daily Journal App&quot;</span><span class="s2">);</span>
+        <span class="s1">showLoginScreen</span><span class="s2">(</span><span class="s1">stage</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">showLoginScreen</span><span class="s2">(</span><span class="s1">Stage stage</span><span class="s2">) {</span>
+        <span class="s1">VBox loginBox </span><span class="s2">= </span><span class="s0">new </span><span class="s1">VBox</span><span class="s2">(</span><span class="s4">15</span><span class="s2">);</span>
+        <span class="s1">loginBox</span><span class="s2">.</span><span class="s1">setPadding</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Insets</span><span class="s2">(</span><span class="s4">30</span><span class="s2">));</span>
+        <span class="s1">loginBox</span><span class="s2">.</span><span class="s1">setStyle</span><span class="s2">(</span><span class="s5">&quot;-fx-background-color: #e3f2fd;&quot;</span><span class="s2">);</span>
+
+        <span class="s1">Label titleLabel </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Label</span><span class="s2">(</span><span class="s5">&quot;Welcome to Daily Journal App&quot;</span><span class="s2">);</span>
+        <span class="s1">titleLabel</span><span class="s2">.</span><span class="s1">setStyle</span><span class="s2">(</span><span class="s5">&quot;-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #1565c0;&quot;</span><span class="s2">);</span>
+
+        <span class="s1">TextField usernameField </span><span class="s2">= </span><span class="s0">new </span><span class="s1">TextField</span><span class="s2">();</span>
+        <span class="s1">usernameField</span><span class="s2">.</span><span class="s1">setPromptText</span><span class="s2">(</span><span class="s5">&quot;Username&quot;</span><span class="s2">);</span>
+        <span class="s1">usernameField</span><span class="s2">.</span><span class="s1">setStyle</span><span class="s2">(</span><span class="s5">&quot;-fx-font-size: 14px;&quot;</span><span class="s2">);</span>
+
+        <span class="s1">PasswordField passwordField </span><span class="s2">= </span><span class="s0">new </span><span class="s1">PasswordField</span><span class="s2">();</span>
+        <span class="s1">passwordField</span><span class="s2">.</span><span class="s1">setPromptText</span><span class="s2">(</span><span class="s5">&quot;Password&quot;</span><span class="s2">);</span>
+        <span class="s1">passwordField</span><span class="s2">.</span><span class="s1">setStyle</span><span class="s2">(</span><span class="s5">&quot;-fx-font-size: 14px;&quot;</span><span class="s2">);</span>
+
+        <span class="s1">Button loginBtn </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Button</span><span class="s2">(</span><span class="s5">&quot;Login&quot;</span><span class="s2">);</span>
+        <span class="s1">loginBtn</span><span class="s2">.</span><span class="s1">setStyle</span><span class="s2">(</span><span class="s1">buttonStyle</span><span class="s2">());</span>
+
+        <span class="s1">loginBtn</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">(</span><span class="s1">e -&gt; </span><span class="s2">{</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">currentUser</span><span class="s2">.</span><span class="s1">login</span><span class="s2">(</span><span class="s1">usernameField</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">(), </span><span class="s1">passwordField</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">())) {</span>
+                <span class="s1">showMainMenu</span><span class="s2">(</span><span class="s1">stage</span><span class="s2">);</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s1">Alert alert </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Alert</span><span class="s2">(</span><span class="s1">Alert</span><span class="s2">.</span><span class="s1">AlertType</span><span class="s2">.</span><span class="s1">ERROR</span><span class="s2">, </span><span class="s5">&quot;Login failed.&quot;</span><span class="s2">);</span>
+                <span class="s1">alert</span><span class="s2">.</span><span class="s1">showAndWait</span><span class="s2">();</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">loginBox</span><span class="s2">.</span><span class="s1">getChildren</span><span class="s2">().</span><span class="s1">addAll</span><span class="s2">(</span><span class="s1">titleLabel</span><span class="s2">, </span><span class="s1">usernameField</span><span class="s2">, </span><span class="s1">passwordField</span><span class="s2">, </span><span class="s1">loginBtn</span><span class="s2">);</span>
+        <span class="s1">loginBox</span><span class="s2">.</span><span class="s1">setAlignment</span><span class="s2">(</span><span class="s1">Pos</span><span class="s2">.</span><span class="s1">CENTER</span><span class="s2">);</span>
+
+        <span class="s1">Scene scene </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scene</span><span class="s2">(</span><span class="s1">loginBox</span><span class="s2">, </span><span class="s4">400</span><span class="s2">, </span><span class="s4">300</span><span class="s2">);</span>
+        <span class="s1">stage</span><span class="s2">.</span><span class="s1">setScene</span><span class="s2">(</span><span class="s1">scene</span><span class="s2">);</span>
+        <span class="s1">stage</span><span class="s2">.</span><span class="s1">show</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">showMainMenu</span><span class="s2">(</span><span class="s1">Stage stage</span><span class="s2">) {</span>
+        <span class="s1">VBox menu </span><span class="s2">= </span><span class="s0">new </span><span class="s1">VBox</span><span class="s2">(</span><span class="s4">15</span><span class="s2">);</span>
+        <span class="s1">menu</span><span class="s2">.</span><span class="s1">setPadding</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Insets</span><span class="s2">(</span><span class="s4">30</span><span class="s2">));</span>
+        <span class="s1">menu</span><span class="s2">.</span><span class="s1">setStyle</span><span class="s2">(</span><span class="s5">&quot;-fx-background-color: #e3f2fd;&quot;</span><span class="s2">);</span>
+        <span class="s1">menu</span><span class="s2">.</span><span class="s1">setAlignment</span><span class="s2">(</span><span class="s1">Pos</span><span class="s2">.</span><span class="s1">CENTER</span><span class="s2">);</span>
+
+        <span class="s1">Label header </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Label</span><span class="s2">(</span><span class="s5">&quot;Main Menu&quot;</span><span class="s2">);</span>
+        <span class="s1">header</span><span class="s2">.</span><span class="s1">setStyle</span><span class="s2">(</span><span class="s5">&quot;-fx-font-size: 20px; -fx-text-fill: #0d47a1; -fx-font-weight: bold;&quot;</span><span class="s2">);</span>
+
+        <span class="s1">Button createBtn </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Button</span><span class="s2">(</span><span class="s5">&quot;📝 Create Entry&quot;</span><span class="s2">);</span>
+        <span class="s1">Button viewBtn </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Button</span><span class="s2">(</span><span class="s5">&quot;📖 View Entries&quot;</span><span class="s2">);</span>
+        <span class="s1">Button reminderBtn </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Button</span><span class="s2">(</span><span class="s5">&quot;⏰ Set Reminder&quot;</span><span class="s2">);</span>
+        <span class="s1">Button exportBtn </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Button</span><span class="s2">(</span><span class="s5">&quot;📤 Export Entries&quot;</span><span class="s2">);</span>
+        <span class="s1">Button exitBtn </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Button</span><span class="s2">(</span><span class="s5">&quot;❌ Exit&quot;</span><span class="s2">);</span>
+
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">Button btn </span><span class="s2">: </span><span class="s0">new </span><span class="s1">Button</span><span class="s2">[]{</span><span class="s1">createBtn</span><span class="s2">, </span><span class="s1">viewBtn</span><span class="s2">, </span><span class="s1">reminderBtn</span><span class="s2">, </span><span class="s1">exportBtn</span><span class="s2">, </span><span class="s1">exitBtn</span><span class="s2">}) {</span>
+            <span class="s1">btn</span><span class="s2">.</span><span class="s1">setStyle</span><span class="s2">(</span><span class="s1">buttonStyle</span><span class="s2">());</span>
+            <span class="s1">btn</span><span class="s2">.</span><span class="s1">setMaxWidth</span><span class="s2">(</span><span class="s4">200</span><span class="s2">);</span>
+        <span class="s2">}</span>
+
+        <span class="s1">createBtn</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">(</span><span class="s1">e -&gt; showCreateEntryDialog</span><span class="s2">());</span>
+        <span class="s1">viewBtn</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">(</span><span class="s1">e -&gt; showEntriesDialog</span><span class="s2">());</span>
+        <span class="s1">reminderBtn</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">(</span><span class="s1">e -&gt; showReminderDialog</span><span class="s2">());</span>
+        <span class="s1">exportBtn</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">(</span><span class="s1">e -&gt; showExportDialog</span><span class="s2">());</span>
+        <span class="s1">exitBtn</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">(</span><span class="s1">e -&gt; stage</span><span class="s2">.</span><span class="s1">close</span><span class="s2">());</span>
+
+        <span class="s1">menu</span><span class="s2">.</span><span class="s1">getChildren</span><span class="s2">().</span><span class="s1">addAll</span><span class="s2">(</span><span class="s1">header</span><span class="s2">, </span><span class="s1">createBtn</span><span class="s2">, </span><span class="s1">viewBtn</span><span class="s2">, </span><span class="s1">reminderBtn</span><span class="s2">, </span><span class="s1">exportBtn</span><span class="s2">, </span><span class="s1">exitBtn</span><span class="s2">);</span>
+        <span class="s1">stage</span><span class="s2">.</span><span class="s1">setScene</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Scene</span><span class="s2">(</span><span class="s1">menu</span><span class="s2">, </span><span class="s4">400</span><span class="s2">, </span><span class="s4">400</span><span class="s2">));</span>
+        <span class="s1">stage</span><span class="s2">.</span><span class="s1">show</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private </span><span class="s1">String buttonStyle</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s5">&quot;-fx-background-color: #64b5f6; &quot; </span><span class="s2">+</span>
+                <span class="s5">&quot;-fx-text-fill: white; &quot; </span><span class="s2">+</span>
+                <span class="s5">&quot;-fx-font-size: 14px; &quot; </span><span class="s2">+</span>
+                <span class="s5">&quot;-fx-background-radius: 10; &quot; </span><span class="s2">+</span>
+                <span class="s5">&quot;-fx-padding: 10 20 10 20;&quot;</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">showCreateEntryDialog</span><span class="s2">() {</span>
+        <span class="s1">TextInputDialog titleDialog </span><span class="s2">= </span><span class="s0">new </span><span class="s1">TextInputDialog</span><span class="s2">();</span>
+        <span class="s1">titleDialog</span><span class="s2">.</span><span class="s1">setHeaderText</span><span class="s2">(</span><span class="s5">&quot;Enter Entry Title:&quot;</span><span class="s2">);</span>
+        <span class="s1">Optional</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">title </span><span class="s2">= </span><span class="s1">titleDialog</span><span class="s2">.</span><span class="s1">showAndWait</span><span class="s2">();</span>
+
+        <span class="s1">TextInputDialog contentDialog </span><span class="s2">= </span><span class="s0">new </span><span class="s1">TextInputDialog</span><span class="s2">();</span>
+        <span class="s1">contentDialog</span><span class="s2">.</span><span class="s1">setHeaderText</span><span class="s2">(</span><span class="s5">&quot;Enter Entry Content:&quot;</span><span class="s2">);</span>
+        <span class="s1">Optional</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">content </span><span class="s2">= </span><span class="s1">contentDialog</span><span class="s2">.</span><span class="s1">showAndWait</span><span class="s2">();</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">title</span><span class="s2">.</span><span class="s1">isPresent</span><span class="s2">() &amp;&amp; </span><span class="s1">content</span><span class="s2">.</span><span class="s1">isPresent</span><span class="s2">()) {</span>
+            <span class="s1">JournalEntry entry </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JournalEntry</span><span class="s2">(</span><span class="s1">title</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(), </span><span class="s1">content</span><span class="s2">.</span><span class="s1">get</span><span class="s2">());</span>
+            <span class="s1">currentUser</span><span class="s2">.</span><span class="s1">addEntry</span><span class="s2">(</span><span class="s1">entry</span><span class="s2">);</span>
+            <span class="s1">Alert alert </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Alert</span><span class="s2">(</span><span class="s1">Alert</span><span class="s2">.</span><span class="s1">AlertType</span><span class="s2">.</span><span class="s1">INFORMATION</span><span class="s2">, </span><span class="s5">&quot;Entry saved.&quot;</span><span class="s2">);</span>
+            <span class="s1">alert</span><span class="s2">.</span><span class="s1">showAndWait</span><span class="s2">();</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">showEntriesDialog</span><span class="s2">() {</span>
+        <span class="s1">StringBuilder sb </span><span class="s2">= </span><span class="s0">new </span><span class="s1">StringBuilder</span><span class="s2">();</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">JournalEntry entry </span><span class="s2">: </span><span class="s1">currentUser</span><span class="s2">.</span><span class="s1">getEntries</span><span class="s2">()) {</span>
+            <span class="s1">sb</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s1">entry</span><span class="s2">).</span><span class="s1">append</span><span class="s2">(</span><span class="s5">&quot;</span><span class="s0">\n\n</span><span class="s5">&quot;</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s1">Alert alert </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Alert</span><span class="s2">(</span><span class="s1">Alert</span><span class="s2">.</span><span class="s1">AlertType</span><span class="s2">.</span><span class="s1">INFORMATION</span><span class="s2">, </span><span class="s1">sb</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">());</span>
+        <span class="s1">alert</span><span class="s2">.</span><span class="s1">setTitle</span><span class="s2">(</span><span class="s5">&quot;All Journal Entries&quot;</span><span class="s2">);</span>
+        <span class="s1">alert</span><span class="s2">.</span><span class="s1">setHeaderText</span><span class="s2">(</span><span class="s0">null</span><span class="s2">);</span>
+        <span class="s1">alert</span><span class="s2">.</span><span class="s1">getDialogPane</span><span class="s2">().</span><span class="s1">setMinHeight</span><span class="s2">(</span><span class="s1">Region</span><span class="s2">.</span><span class="s1">USE_PREF_SIZE</span><span class="s2">);</span>
+        <span class="s1">alert</span><span class="s2">.</span><span class="s1">showAndWait</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">showReminderDialog</span><span class="s2">() {</span>
+        <span class="s1">TextInputDialog msgDialog </span><span class="s2">= </span><span class="s0">new </span><span class="s1">TextInputDialog</span><span class="s2">();</span>
+        <span class="s1">msgDialog</span><span class="s2">.</span><span class="s1">setHeaderText</span><span class="s2">(</span><span class="s5">&quot;Enter Reminder Message:&quot;</span><span class="s2">);</span>
+        <span class="s1">Optional</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">message </span><span class="s2">= </span><span class="s1">msgDialog</span><span class="s2">.</span><span class="s1">showAndWait</span><span class="s2">();</span>
+
+        <span class="s1">TextInputDialog daysDialog </span><span class="s2">= </span><span class="s0">new </span><span class="s1">TextInputDialog</span><span class="s2">();</span>
+        <span class="s1">daysDialog</span><span class="s2">.</span><span class="s1">setHeaderText</span><span class="s2">(</span><span class="s5">&quot;In how many days?&quot;</span><span class="s2">);</span>
+        <span class="s1">Optional</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">daysStr </span><span class="s2">= </span><span class="s1">daysDialog</span><span class="s2">.</span><span class="s1">showAndWait</span><span class="s2">();</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">message</span><span class="s2">.</span><span class="s1">isPresent</span><span class="s2">() &amp;&amp; </span><span class="s1">daysStr</span><span class="s2">.</span><span class="s1">isPresent</span><span class="s2">()) {</span>
+            <span class="s0">try </span><span class="s2">{</span>
+                <span class="s0">int </span><span class="s1">days </span><span class="s2">= </span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">daysStr</span><span class="s2">.</span><span class="s1">get</span><span class="s2">());</span>
+                <span class="s1">Calendar cal </span><span class="s2">= </span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">();</span>
+                <span class="s1">cal</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">Calendar</span><span class="s2">.</span><span class="s1">DAY_OF_MONTH</span><span class="s2">, </span><span class="s1">days</span><span class="s2">);</span>
+                <span class="s1">Reminder reminder </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Reminder</span><span class="s2">(</span><span class="s1">cal</span><span class="s2">.</span><span class="s1">getTime</span><span class="s2">(), </span><span class="s1">message</span><span class="s2">.</span><span class="s1">get</span><span class="s2">());</span>
+                <span class="s1">currentUser</span><span class="s2">.</span><span class="s1">addReminder</span><span class="s2">(</span><span class="s1">reminder</span><span class="s2">);</span>
+                <span class="s1">Alert alert </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Alert</span><span class="s2">(</span><span class="s1">Alert</span><span class="s2">.</span><span class="s1">AlertType</span><span class="s2">.</span><span class="s1">INFORMATION</span><span class="s2">, </span><span class="s5">&quot;Reminder set.&quot;</span><span class="s2">);</span>
+                <span class="s1">alert</span><span class="s2">.</span><span class="s1">showAndWait</span><span class="s2">();</span>
+            <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">NumberFormatException e</span><span class="s2">) {</span>
+                <span class="s1">Alert alert </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Alert</span><span class="s2">(</span><span class="s1">Alert</span><span class="s2">.</span><span class="s1">AlertType</span><span class="s2">.</span><span class="s1">ERROR</span><span class="s2">, </span><span class="s5">&quot;Invalid number of days.&quot;</span><span class="s2">);</span>
+                <span class="s1">alert</span><span class="s2">.</span><span class="s1">showAndWait</span><span class="s2">();</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">showExportDialog</span><span class="s2">() {</span>
+        <span class="s1">ChoiceDialog</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">dialog </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ChoiceDialog</span><span class="s2">&lt;&gt;(</span><span class="s5">&quot;PDF&quot;</span><span class="s2">, </span><span class="s5">&quot;PDF&quot;</span><span class="s2">, </span><span class="s5">&quot;Word&quot;</span><span class="s2">);</span>
+        <span class="s1">dialog</span><span class="s2">.</span><span class="s1">setHeaderText</span><span class="s2">(</span><span class="s5">&quot;Choose export format:&quot;</span><span class="s2">);</span>
+        <span class="s1">Optional</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">choice </span><span class="s2">= </span><span class="s1">dialog</span><span class="s2">.</span><span class="s1">showAndWait</span><span class="s2">();</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">choice</span><span class="s2">.</span><span class="s1">isPresent</span><span class="s2">()) {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">choice</span><span class="s2">.</span><span class="s1">get</span><span class="s2">().</span><span class="s1">equals</span><span class="s2">(</span><span class="s5">&quot;PDF&quot;</span><span class="s2">)) {</span>
+                <span class="s1">ExportManager</span><span class="s2">.</span><span class="s1">exportToPDF</span><span class="s2">(</span><span class="s1">currentUser</span><span class="s2">.</span><span class="s1">getEntries</span><span class="s2">());</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s1">ExportManager</span><span class="s2">.</span><span class="s1">exportToWord</span><span class="s2">(</span><span class="s1">currentUser</span><span class="s2">.</span><span class="s1">getEntries</span><span class="s2">());</span>
+            <span class="s2">}</span>
+            <span class="s1">Alert alert </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Alert</span><span class="s2">(</span><span class="s1">Alert</span><span class="s2">.</span><span class="s1">AlertType</span><span class="s2">.</span><span class="s1">INFORMATION</span><span class="s2">, </span><span class="s5">&quot;Export simulated in console.&quot;</span><span class="s2">);</span>
+            <span class="s1">alert</span><span class="s2">.</span><span class="s1">showAndWait</span><span class="s2">();</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>
